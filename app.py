@@ -89,8 +89,9 @@ def user_details(user_id):
     """Dispalys details of one user"""
 
     user = User.query.get_or_404(user_id)
+    user_posts = Post.query.filter_by(user_id=user.id).all()
 
-    return render_template("user-detail.html", user=user)
+    return render_template("user-detail.html", user=user, user_posts=user_posts)
 
 @app.route('/users/<int:user_id>/delete', methods=["POST"])
 def user_delete(user_id):
@@ -100,4 +101,20 @@ def user_delete(user_id):
     db.session.commit()
 
     return redirect('/users')
+
+@app.route('/posts/<int:post_id>')
+def post_details(post_id):
+    """displays the content of a post"""
+
+    post = Post.query.get(post_id)
+
+    return render_template("post-detail.html", post=post)
+
+@app.route('/posts/<int:post_id>/edit')
+def edit_post_details_form(post_id):
+    """displays the content of a post"""
+
+    post = Post.query.get(post_id)
+
+    return render_template("edit-post.html", post=post)
 

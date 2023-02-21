@@ -24,6 +24,8 @@ def root():
 
     return redirect('/users')
 
+# USER ROUTES
+
 @app.route('/users')
 def users():
     """Shows a list of all users"""
@@ -100,6 +102,8 @@ def edit_user_post(user_id):
     db.session.commit()
 
     return redirect('/users')
+
+# POST ROUTES
 
 @app.route('/posts/<int:post_id>')
 def post_details(post_id):

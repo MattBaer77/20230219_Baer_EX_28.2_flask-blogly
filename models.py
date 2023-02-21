@@ -32,7 +32,7 @@ class User(db.Model):
                     nullable=True,
                     unique=False)
 
-    posts = db.relationship("Post", backref="user")
+    posts = db.relationship("Post", backref="user", cascade="all, delete-orphan")
 
 class Post(db.Model):
     """Post Model"""
@@ -43,7 +43,7 @@ class Post(db.Model):
                     primary_key=True,
                     autoincrement=True)
 
-    title = db.Column(db.String(20),
+    title = db.Column(db.String(100),
                     nullable=True,
                     unique=False,
                     default='Untitled Post')
